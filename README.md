@@ -1,1 +1,1 @@
-# wsweeney_HCI-584_project
+# wsweeney_HCI-584_Budget Tracker
