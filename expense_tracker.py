@@ -1,21 +1,44 @@
 from expense import Expense
 import calendar
 import datetime
+import pickle  # to save and load data
+import os
 
 
 def main():
     print(f"🎯 Running Expense Tracker!")
-    expense_file_path = "expenses.csv"
-    budget = 2000
 
-    # Get user input for expense.
-    expense = get_user_expense()
+    date = input("Enter the date (mm-dd-yyyy) of the expenses: ")  # should check that it's of that format!
+    expense_list = []
 
-    # Write their expense to a file.
-    save_expense_to_file(expense, expense_file_path)
+    # Get user input for expense
+    while True:
+        expense = get_user_expense()
+        print(expense)
+        expense_list.append(expense)
+        yn = input("Do you want to add another expense? (y/n): ")
+        if yn.lower() != "y":
+            break
 
-    # Read file and summarize expenses.
-    summarize_expenses(expense_file_path, budget)
+    # Write their expense to a file
+    save_expense_to_file(expense_list, date)
+
+    # Summarize expenses in list
+    summarize_expenses_list(expense_list)
+
+    # List all existing expenses
+    expense_dates = list_expenses()
+    print("Existing expenses:")
+    for i, date in enumerate(expense_dates):
+        print(f"{i + 1}. {date}")
+
+    # Load and summarize expenses for a specific date
+    selected_index = int(input(f"Summarize? Enter a date number [1 - {len(expense_dates)}]: ")) - 1
+
+    if selected_index in range(len(expense_dates)):
+        filename = expense_dates[selected_index]
+        expense_list = load_expense_from_file(filename)
+        summarize_expenses_list(expense_list)
 
 
 def get_user_expense():
@@ -42,42 +65,34 @@ def get_user_expense():
             print("Invalid category. Please try again!")
 
 
-def save_expense_to_file(expense: Expense, expense_file_path):
-    print(f"🎯 Saving User Expense: {expense} to {expense_file_path}")
-    with open(expense_file_path, "a") as f:
-        f.write(f"{expense.name},{expense.amount},{expense.category}\n")
+def save_expense_to_file(expense_list, date):
+    filename = f"expenses_{date}.pkl"
+    print(f"🎯 Saving User Expense for {date} to File")
+    with open(filename, "wb+") as f:
+        pickle.dump(expense_list, f)
 
 
-def summarize_expenses(expense_file_path, budget):
+def summarize_expenses_list(expense_list):
     print(f"🎯 Summarizing User Expense")
-    expenses: list[Expense] = []
-    with open(expense_file_path, "r") as f:
-        lines = f.readlines()
-        for line in lines:
-            expense_name, expense_amount, expense_category = line.strip().split(",")
-            line_expense = Expense(
-                name=expense_name,
-                amount=float(expense_amount),
-                category=expense_category,
-            )
-            expenses.append(line_expense)
-
+    total_expense = 0
     amount_by_category = {}
-    for expense in expenses:
-        key = expense.category
-        if key in amount_by_category:
-            amount_by_category[key] += expense.amount
+
+    for expense in expense_list:
+        print(expense)
+        total_expense += expense.amount
+        if expense.category in amount_by_category:
+            amount_by_category[expense.category] += expense.amount
         else:
-            amount_by_category[key] = expense.amount
+            amount_by_category[expense.category] = expense.amount
 
     print("Expenses By Category 📈:")
     for key, amount in amount_by_category.items():
         print(f"  {key}: ${amount:.2f}")
 
-    total_spent = sum([x.amount for x in expenses])
-    print(f"💵 Total Spent: ${total_spent:.2f}")
+    print(f"💵 Total expenses: ${total_expense:.2f}")
 
-    remaining_budget = budget - total_spent
+    budget = 2000  # Assuming budget is fixed, this can be made dynamic if needed
+    remaining_budget = budget - total_expense
     print(f"✅ Budget Remaining: ${remaining_budget:.2f}")
 
     now = datetime.datetime.now()
@@ -86,6 +101,22 @@ def summarize_expenses(expense_file_path, budget):
 
     daily_budget = remaining_budget / remaining_days
     print(green(f"👉 Budget Per Day: ${daily_budget:.2f}"))
+
+
+def load_expense_from_file(filename):
+    with open(filename, "rb") as f:
+        expense_list = pickle.load(f)
+    return expense_list
+
+
+def list_expenses():
+    # list all pickle files in the current directory
+    expense_dates = []
+    files = os.listdir()
+    for file in files:
+        if file.endswith(".pkl"):
+            expense_dates.append(file)
+    return expense_dates
 
 
 def green(text):
