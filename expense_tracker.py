@@ -1,10 +1,11 @@
-from expense import Expense
+from expenses import Expense  # Corrected import statement
 import calendar
 import datetime
 import pickle  # to save and load data
 import os
 
 def main():
+    """Main function to run the Expense Tracker application."""
     print(f"🎯 Running Expense Tracker!")
 
     while True:
@@ -37,6 +38,7 @@ def main():
             print("Invalid task. Please try again!")
 
 def add_expense_to_new_file():
+    """Add a new expense to a new file."""
     date = input("Enter the date (mm-dd-yyyy) of the expenses: ")  # should check that it's of that format!
     expense_list = []
 
@@ -51,6 +53,7 @@ def add_expense_to_new_file():
     save_expense_to_file(expense_list, date)
 
 def summarize_file():
+    """Summarize the expenses of a selected file by category."""
     expense_dates = list_expenses()
     print("Existing expenses:")
     for i, date in enumerate(expense_dates):
@@ -64,6 +67,7 @@ def summarize_file():
         summarize_expenses_list(expense_list)
 
 def add_expense_to_existing_file():
+    """Add a new expense to an existing file."""
     expense_dates = list_expenses()
     print("Existing expenses:")
     for i, date in enumerate(expense_dates):
@@ -86,6 +90,7 @@ def add_expense_to_existing_file():
         save_expense_to_file(expense_list, filename)
 
 def view_file_content():
+    """View the content of a selected file."""
     expense_dates = list_expenses()
     print("Existing expenses:")
     for i, date in enumerate(expense_dates):
@@ -100,6 +105,7 @@ def view_file_content():
             print(expense)
 
 def delete_file():
+    """Delete a selected file."""
     expense_dates = list_expenses()
     print("Existing expenses:")
     for i, date in enumerate(expense_dates):
@@ -113,6 +119,7 @@ def delete_file():
         print(f"Deleted {filename}")
 
 def summarize_all_files():
+    """Summarize all expenses from all files by category."""
     expense_dates = list_expenses()
     all_expenses = []
 
@@ -123,6 +130,11 @@ def summarize_all_files():
     summarize_expenses_list(all_expenses)
 
 def get_user_expense():
+    """Prompt the user to input details for a new expense.
+
+    Returns:
+        Expense: A new Expense object.
+    """
     print(f"🎯 Getting User Expense")
     expense_name = input("Enter expense name: ")
     expense_amount = float(input("Enter expense amount: "))
@@ -146,12 +158,23 @@ def get_user_expense():
             print("Invalid category. Please try again!")
 
 def save_expense_to_file(expense_list, date):
+    """Save the list of expenses to a file.
+
+    Args:
+        expense_list (list): The list of Expense objects to save.
+        date (str): The date used for naming the file.
+    """
     filename = f"expenses_{date}.pkl" if not date.endswith(".pkl") else date
     print(f"🎯 Saving User Expense for {date} to File")
     with open(filename, "wb+") as f:
         pickle.dump(expense_list, f)
 
 def summarize_expenses_list(expense_list):
+    """Summarize a list of expenses by category and total amount.
+
+    Args:
+        expense_list (list): The list of Expense objects to summarize.
+    """
     print(f"🎯 Summarizing User Expense")
     total_expense = 0
     amount_by_category = {}
@@ -182,11 +205,24 @@ def summarize_expenses_list(expense_list):
     print(green(f"👉 Budget Per Day: ${daily_budget:.2f}"))
 
 def load_expense_from_file(filename):
+    """Load a list of expenses from a file.
+
+    Args:
+        filename (str): The name of the file to load the expenses from.
+
+    Returns:
+        list: The list of Expense objects loaded from the file.
+    """
     with open(filename, "rb") as f:
         expense_list = pickle.load(f)
     return expense_list
 
 def list_expenses():
+    """List all expense files in the current directory.
+
+    Returns:
+        list: A list of filenames for all expense files.
+    """
     expense_dates = []
     files = os.listdir()
     for file in files:
@@ -195,7 +231,17 @@ def list_expenses():
     return expense_dates
 
 def green(text):
+    """Return text formatted in green.
+
+    Args:
+        text (str): The text to format.
+
+    Returns:
+        str: The formatted text.
+    """
     return f"\033[92m{text}\033[0m"
 
+if __name__ == "__main__":
+    main()
 if __name__ == "__main__":
     main()
