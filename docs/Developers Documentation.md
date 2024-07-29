@@ -16,29 +16,6 @@ The Expense Tracker project is a simple application to help users manage and tra
 ## Project Structure
 Here is a brief overview of the directory structure:
 
-
-Certainly! Markdown does not support CSS styling directly, so I'll reformat the documentation for better readability in a .md file. Here’s a cleaner version using Markdown:
-
-markdown
-Copy code
-# Developer Documentation for Expense Tracker Project
-
-## Table of Contents
-1. [Overview](#overview)
-2. [Project Structure](#project-structure)
-3. [Installation and Setup](#installation-and-setup)
-4. [In-code Documentation](#in-code-documentation)
-5. [User Interaction and Flow](#user-interaction-and-flow)
-6. [Known Issues](#known-issues)
-7. [Future Work](#future-work)
-8. [Ongoing Deployment/Development](#ongoing-deploymentdevelopment)
-
-## Overview
-The Expense Tracker project is a simple application to help users manage and track their expenses. Users can add, view, summarize, and delete expenses, as well as view summaries by category. This documentation provides an in-depth guide for developers to understand the project structure, codebase, and workflow.
-
-## Project Structure
-Here is a brief overview of the directory structure:
-
 ExpenseTracker/
 │
 ├── docs/
