@@ -8,8 +8,6 @@
 - [Troubleshooting](#troubleshooting)
 - [Limitations](#limitations)
 - [Developer Documentation](#developer-documentation)
-- [Example Screenshots](#example-screenshots)
-- [Notes](#notes)
 
 ## Introduction
 Welcome to the Expense Tracker! This project is designed to help you, esteemed user, manage and track your expenses efficiently. You can add, view, summarize, and delete expenses, and view summaries by category.
@@ -22,11 +20,9 @@ Assuming you have cloned or downloaded the repository into a folder, please foll
 2. **Dependencies**: Kindly install the required dependencies. Navigate to the project folder and run:
    ```bash
    pip install -r requirements.txt
-Usage
+## Usage
 To run the Expense Tracker, please execute the main script:
 
-bash
-Copy code
 python src/main.py
 Main Menu
 Upon running the script, you will see the following options:
@@ -64,18 +60,18 @@ Confirm deletion.
 Summarizing All Files
 Select option 6.
 View a summary of all expenses by category and total amount.
-Troubleshooting
+## Troubleshooting
 Here are some common issues you might encounter:
 
 Invalid Task: If you enter an invalid task number, you will see an "Invalid task. Please try again!" message.
 File Not Found: Ensure the file name is correct when accessing existing files.
 Invalid Date Format: Enter the date in mm-dd-yyyy format.
-Limitations
+## Limitations
 Please note the following limitations:
 
 The budget is currently fixed at $2000. This can be made dynamic if needed.
 The application only supports .pkl file format for storing expenses.
-Developer Documentation
+## Developer Documentation
 For more technical details and development guidelines, please refer to the Developer Documentation.
 
 
