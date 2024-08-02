@@ -42,25 +42,36 @@ Please enter the corresponding number to select a task.
 - Enter the date in the format mm-dd-yyyy.
 - Provide the details for the expense, including name, amount, and category.
 - Continue adding expenses or exit.
+![image](https://github.com/user-attachments/assets/4633d86c-22fa-4afa-948a-ecbfc50b3dd6)
+
 ### Summarizing a File
 - Select option `2` to summarize a file by category.
 - Choose the file date from the list.
 - View the summarized expenses by category and total amount.
+![image](https://github.com/user-attachments/assets/8f0a3019-459c-42de-8150-763159a751f3)
+
 ### Adding an Expense to an Existing File
 - Select option `3`.
 - Choose the file date from the list.
 - Add expenses as described in "Adding an Expense".
+![image](https://github.com/user-attachments/assets/83cff351-9243-4cc8-b3d9-e9c50a3c7bcc)
+
 ### Viewing File Content
 - Select option `4`.
 - Choose the file date from the list.
 - View all expenses in the selected file.
+![image](https://github.com/user-attachments/assets/d96d45ae-3836-426f-a134-59f815a84b9c)
+
 ### Deleting a File
 - Select option `5`.
 - Choose the file date from the list.
 - Confirm deletion.
+![image](https://github.com/user-attachments/assets/c9901a89-05da-47af-97ed-ebff41138039)
+ 
 ### Summarizing All Files
 - Select option `6`.
 - View a summary of all expenses by category and total amount.
+![image](https://github.com/user-attachments/assets/040a2faa-0e18-41d4-91ef-9a5b4ae8fd31)
 
 ## Troubleshooting
 Here are some common issues you might encounter:
